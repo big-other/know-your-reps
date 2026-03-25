@@ -152,6 +152,10 @@ Vercel environment variables (Geocodio key, FEC key) are set via the Vercel dash
 - **Fonts:** Instrument Serif (display/headlines), DM Sans (body/UI)
 - **Animations:** Fade-in, slide-down, scale-in, stagger-children (defined in `app/globals.css`)
 
+## TODO
+
+- **Pledge tracking:** Integrate the Humans First "No Big AI Money" pledge into search results. When a candidate or incumbent has signed the pledge to not accept AI industry PAC money, display a badge or indicator on their RepCard. No one has signed the pledge yet, so this is future work — will need a data source (likely a simple JSON list or CMS) of pledge signers that gets checked during the lookup flow alongside PAC spending data.
+
 ## Legal
 
 This is a nonpartisan informational tool. It does not endorse or oppose any candidate or party. All data comes from public sources (FEC filings, state election commissions, Geocodio). No user data (addresses, zip codes) is stored.
