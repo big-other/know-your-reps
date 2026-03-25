@@ -47,8 +47,8 @@ export interface GeocodioResult {
   fields: {
     congressional_districts: CongressionalDistrict[];
     state_legislative_districts: {
-      house?: StateLegislativeDistrict;
-      senate?: StateLegislativeDistrict;
+      house?: StateLegislativeDistrict | StateLegislativeDistrict[];
+      senate?: StateLegislativeDistrict | StateLegislativeDistrict[];
     };
   };
 }

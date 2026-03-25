@@ -25,10 +25,10 @@ function legislatorToCard(
   const pacResult = checkPacMoney(name, state);
 
   let title = "";
-  if (leg.type === "senator") title = "U.S. Senator";
-  else if (leg.type === "representative") title = "U.S. Representative";
-  else if (level === "state" && chamber === "upper") title = "State Senator";
+  if (level === "state" && chamber === "upper") title = "State Senator";
   else if (level === "state" && chamber === "lower") title = "State Representative";
+  else if (leg.type === "senator") title = "U.S. Senator";
+  else if (leg.type === "representative") title = "U.S. Representative";
 
   // Determine if up for election in 2026
   let upForElection = false;
@@ -113,31 +113,42 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // State legislators
-    if (stateLeg?.senate?.current_legislators) {
-      for (const leg of stateLeg.senate.current_legislators) {
-        representatives.push(
-          legislatorToCard(
-            { ...leg, type: "senator" as const },
-            state,
-            `State Senate District ${stateLeg.senate.district_number}`,
-            "state",
-            "upper"
-          )
-        );
+    // State legislators — Geocodio returns arrays or single objects
+    const senateDistricts = stateLeg?.senate
+      ? Array.isArray(stateLeg.senate) ? stateLeg.senate : [stateLeg.senate]
+      : [];
+    const houseDistricts = stateLeg?.house
+      ? Array.isArray(stateLeg.house) ? stateLeg.house : [stateLeg.house]
+      : [];
+
+    for (const dist of senateDistricts) {
+      if (dist?.current_legislators) {
+        for (const leg of dist.current_legislators) {
+          representatives.push(
+            legislatorToCard(
+              { ...leg, type: "senator" as const },
+              state,
+              `State Senate District ${dist.district_number}`,
+              "state",
+              "upper"
+            )
+          );
+        }
       }
     }
-    if (stateLeg?.house?.current_legislators) {
-      for (const leg of stateLeg.house.current_legislators) {
-        representatives.push(
-          legislatorToCard(
-            { ...leg, type: "representative" as const },
-            state,
-            `State House District ${stateLeg.house.district_number}`,
-            "state",
-            "lower"
-          )
-        );
+    for (const dist of houseDistricts) {
+      if (dist?.current_legislators) {
+        for (const leg of dist.current_legislators) {
+          representatives.push(
+            legislatorToCard(
+              { ...leg, type: "representative" as const },
+              state,
+              `State House District ${dist.district_number}`,
+              "state",
+              "lower"
+            )
+          );
+        }
       }
     }
 

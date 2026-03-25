@@ -19,6 +19,8 @@ export async function geocodeLookup(query: string): Promise<{
   const response = await fetch(url.toString());
 
   if (!response.ok) {
+    const body = await response.text().catch(() => "");
+    console.error(`Geocod.io error: status=${response.status} body=${body}`);
     if (response.status === 422) {
       throw new Error("ADDRESS_NOT_FOUND");
     }

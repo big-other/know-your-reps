@@ -68,7 +68,7 @@ export function PacBadge({
           <p className="mt-3 text-xs text-muted">
             Source:{" "}
             <a
-              href="https://www.humansfirst.com/ai-spending"
+              href="https://www.humansfirst.org/ai-spending"
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:text-nearblack"

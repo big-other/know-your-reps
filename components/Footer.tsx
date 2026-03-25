@@ -33,7 +33,7 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://www.humansfirst.com/ai-spending"
+                    href="https://www.humansfirst.org/ai-spending"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-nearblack transition-colors"

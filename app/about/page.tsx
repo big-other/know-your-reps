@@ -78,12 +78,12 @@ export default function AboutPage() {
               PACs is maintained by the Humans First research team based on
               public FEC filings and corporate disclosures. See the full list at{" "}
               <a
-                href="https://www.humansfirst.com/ai-spending"
+                href="https://www.humansfirst.org/ai-spending"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-saffron-dark underline hover:no-underline"
               >
-                humansfirst.com/ai-spending
+                humansfirst.org/ai-spending
               </a>
               .
             </li>
