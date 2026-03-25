@@ -55,12 +55,12 @@ export function PacBadge({
     if (!expanded && buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
       const popupWidth = 320;
-      let left = rect.left;
-      if (left + popupWidth > window.innerWidth - 16) {
-        left = window.innerWidth - popupWidth - 16;
+      let left = rect.left + window.scrollX;
+      if (left + popupWidth > window.innerWidth + window.scrollX - 16) {
+        left = window.innerWidth + window.scrollX - popupWidth - 16;
       }
       if (left < 16) left = 16;
-      setPopupPos({ top: rect.bottom + 8, left });
+      setPopupPos({ top: rect.bottom + window.scrollY + 8, left });
     }
     setExpanded(!expanded);
   }
@@ -104,7 +104,7 @@ export function PacBadge({
             />
             {/* Popup at body level — escapes all parent stacking/overflow */}
             <div
-              className="fixed z-[1000] w-80 bg-paper border border-stone rounded-xl shadow-xl p-4 animate-scale-in"
+              className="absolute z-[1000] w-80 bg-paper border border-stone rounded-xl shadow-xl p-4 animate-scale-in"
               style={{ top: popupPos.top, left: popupPos.left }}
             >
               <h4 className="font-display text-base text-dark-warm mb-1">
