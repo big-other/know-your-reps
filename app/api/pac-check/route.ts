@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { checkPacMoney } from "@/lib/pac-matcher";
+import { loadPacTrackerData, checkPacMoney } from "@/lib/pac-matcher";
 
 export async function GET(request: NextRequest) {
   const name = request.nextUrl.searchParams.get("name");
@@ -12,7 +12,8 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const result = checkPacMoney(name, state || undefined);
+  const pacLookup = await loadPacTrackerData();
+  const result = checkPacMoney(pacLookup, name, state || undefined);
 
   if (result) {
     return NextResponse.json({

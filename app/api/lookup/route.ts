@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { geocodeLookup, getStateFromResult } from "@/lib/geocodio";
 import { searchCandidates } from "@/lib/fec";
-import { checkPacMoney } from "@/lib/pac-matcher";
+import { loadPacTrackerData, checkPacMoney, type PacLookup } from "@/lib/pac-matcher";
 import { getCached, setCache, normalizeZip } from "@/lib/cache";
 import { parseFecName } from "@/lib/name-matcher";
 import senateClass2 from "@/data/senate-class-2.json";
@@ -19,10 +19,11 @@ function legislatorToCard(
   state: string,
   districtInfo: string,
   level: "federal" | "state",
-  chamber: string
+  chamber: string,
+  pacLookup: PacLookup
 ): RepresentativeCard {
   const name = `${leg.bio.first_name} ${leg.bio.last_name}`;
-  const pacResult = checkPacMoney(name, state);
+  const pacResult = checkPacMoney(pacLookup, name, state);
 
   let title = "";
   if (level === "state" && chamber === "upper") title = "State Senator";
@@ -91,6 +92,9 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    // 0. Load PAC tracker data (cached, fetched from GitHub)
+    const pacLookup = await loadPacTrackerData();
+
     // 1. Geocodio lookup
     const { results, multipleDistricts } = await geocodeLookup(query);
     const result = results[0];
@@ -109,7 +113,7 @@ export async function GET(request: NextRequest) {
             ? `${state}-${cd.district_number}`
             : state;
         representatives.push(
-          legislatorToCard(leg, state, districtInfo, "federal", leg.type === "senator" ? "upper" : "lower")
+          legislatorToCard(leg, state, districtInfo, "federal", leg.type === "senator" ? "upper" : "lower", pacLookup)
         );
       }
     }
@@ -131,7 +135,8 @@ export async function GET(request: NextRequest) {
               state,
               `State Senate District ${dist.district_number}`,
               "state",
-              "upper"
+              "upper",
+              pacLookup
             )
           );
         }
@@ -146,7 +151,8 @@ export async function GET(request: NextRequest) {
               state,
               `State House District ${dist.district_number}`,
               "state",
-              "lower"
+              "lower",
+              pacLookup
             )
           );
         }
@@ -164,7 +170,7 @@ export async function GET(request: NextRequest) {
         const fecHouse = await searchCandidates(state, "H", cd.district_number.toString());
         houseCandidates = fecHouse.map((c) => {
           const { firstName, lastName } = parseFecName(c.name);
-          const pacResult = checkPacMoney(`${firstName} ${lastName}`, state);
+          const pacResult = checkPacMoney(pacLookup, `${firstName} ${lastName}`, state);
           return {
             name: `${firstName} ${lastName}`,
             party: c.party_full || c.party,
@@ -199,7 +205,7 @@ export async function GET(request: NextRequest) {
           const fecSenate = await searchCandidates(state, "S");
           senateCandidates = fecSenate.map((c) => {
             const { firstName, lastName } = parseFecName(c.name);
-            const pacResult = checkPacMoney(`${firstName} ${lastName}`, state);
+            const pacResult = checkPacMoney(pacLookup, `${firstName} ${lastName}`, state);
             return {
               name: `${firstName} ${lastName}`,
               party: c.party_full || c.party,

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { searchCandidates } from "@/lib/fec";
 import { getCached, setCache } from "@/lib/cache";
 import { parseFecName } from "@/lib/name-matcher";
-import { checkPacMoney } from "@/lib/pac-matcher";
+import { loadPacTrackerData, checkPacMoney } from "@/lib/pac-matcher";
 import type { CandidateInfo } from "@/lib/types";
 
 export async function GET(request: NextRequest) {
@@ -24,6 +24,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    const pacLookup = await loadPacTrackerData();
     const fecResults = await searchCandidates(
       state,
       office,
@@ -32,7 +33,7 @@ export async function GET(request: NextRequest) {
 
     const candidates: CandidateInfo[] = fecResults.map((c) => {
       const { firstName, lastName } = parseFecName(c.name);
-      const pacResult = checkPacMoney(`${firstName} ${lastName}`, state);
+      const pacResult = checkPacMoney(pacLookup, `${firstName} ${lastName}`, state);
       return {
         name: `${firstName} ${lastName}`,
         party: c.party_full || c.party,

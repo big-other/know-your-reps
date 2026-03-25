@@ -1,0 +1,1289 @@
+{
+  "_schema_version": "1.0",
+  "metadata": {
+    "title": "AI PAC Independent Expenditures",
+    "last_updated": "2026-03-02T21:14:36Z",
+    "data_through": "2026-02-28",
+    "build_commit": "a14e2ba",
+    "sources": {
+      "fec": "FEC API + e-filings (api.open.fec.gov)",
+      "tec": "Texas Ethics Commission bulk CSV",
+      "il_sbe": "Illinois State Board of Elections",
+      "media": "News reports and company blog posts"
+    }
+  },
+  "aggregates": {
+    "total_independent_expenditures": 14916869,
+    "total_contributions_tracked": 113515000,
+    "by_party": {
+      "dem": {
+        "support": 4571968,
+        "oppose": 1632155
+      },
+      "rep": {
+        "support": 8712746,
+        "oppose": 0
+      }
+    },
+    "by_state": {
+      "NY": {
+        "total": 1927550,
+        "federal": 1927550,
+        "state": 0
+      },
+      "IL": {
+        "total": 2504989,
+        "federal": 2232981,
+        "state": 272008
+      },
+      "FL": {
+        "total": 5000000,
+        "federal": 5000000,
+        "state": 0
+      },
+      "TX": {
+        "total": 3353605,
+        "federal": 2122716,
+        "state": 1230889
+      },
+      "NC": {
+        "total": 2130725,
+        "federal": 2130725,
+        "state": 0
+      }
+    }
+  },
+  "recent_changes": [
+    {
+      "date": "2026-03-02",
+      "type": "data_update",
+      "summary": "Updated FEC independent expenditure totals from latest e-filings",
+      "details": "Think Big NY-12 (Bores) total now $1,632,155; Jobs & Democracy TX-33 (Allred) added at $149,926",
+      "affected_nodes": [
+        "bores-ltf",
+        "allred"
+      ],
+      "source": "FEC F24 e-filings"
+    },
+    {
+      "date": "2026-02-27",
+      "type": "data_update",
+      "summary": "Updated IL Making Our Tomorrow expenditures from third B-1 filing",
+      "details": "New $88,967 in spending on Kendrick, Braun, Kearney, Andrade. Total expenditures now $272,007.",
+      "affected_nodes": [
+        "kendrick",
+        "braun",
+        "kearney",
+        "andrade"
+      ],
+      "source": "IL SBE B-1 Filing (2/27/2026)"
+    },
+    {
+      "date": "2026-02-23",
+      "type": "new_entity",
+      "summary": "Added Forge the Future Project (TX GPAC) — Meta spending in Texas state races",
+      "details": "Meta contributed $1.37M. PAC spending on 12 candidates, led by Hancock (Comptroller) at $495K.",
+      "affected_nodes": [
+        "ftf-hub",
+        "meta"
+      ],
+      "source": "TX Ethics Commission 8-day pre-election filing"
+    }
+  ],
+  "networks": [
+    {
+      "id": "ltf",
+      "label": "Leading the Future Network",
+      "description": "AI industry Super PAC network (a16z, OpenAI-linked). Bipartisan spending."
+    },
+    {
+      "id": "pf",
+      "label": "Public First / Anthropic Network",
+      "description": "Anthropic-backed 501(c)(4) and affiliated Super PACs."
+    },
+    {
+      "id": "ftf",
+      "label": "Meta Network",
+      "description": "Meta Platforms state-level PACs in TX and IL."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "sub": "Major AI company",
+      "type": "origin",
+      "w": 120,
+      "h": 34,
+      "network": "ltf"
+    },
+    {
+      "id": "ma",
+      "label": "Marc Andreessen",
+      "sub": "a16z co-founder, VC",
+      "type": "origin",
+      "w": 124,
+      "h": 34,
+      "network": "ltf"
+    },
+    {
+      "id": "bh",
+      "label": "Ben Horowitz",
+      "sub": "a16z co-founder, VC",
+      "type": "origin",
+      "w": 124,
+      "h": 34,
+      "network": "ltf"
+    },
+    {
+      "id": "conway",
+      "label": "Ron Conway",
+      "sub": "SV VC",
+      "type": "donor",
+      "w": 162,
+      "h": 34,
+      "network": "ltf"
+    },
+    {
+      "id": "brk",
+      "label": "Greg & Anna Brockman",
+      "sub": "OpenAI president + spouse",
+      "type": "donor",
+      "w": 162,
+      "h": 34,
+      "network": "ltf"
+    },
+    {
+      "id": "a16",
+      "label": "a16z Capital Mgmt",
+      "sub": "Andreessen Horowitz fund",
+      "type": "donor",
+      "w": 162,
+      "h": 34,
+      "network": "ltf"
+    },
+    {
+      "id": "perp",
+      "label": "Perplexity AI",
+      "sub": "AI search startup",
+      "type": "donor",
+      "w": 162,
+      "h": 34,
+      "network": "ltf"
+    },
+    {
+      "id": "palantir",
+      "label": "Palantir",
+      "sub": "AI company · Defense contractor",
+      "type": "origin",
+      "w": 155,
+      "h": 34,
+      "network": "ltf"
+    },
+    {
+      "id": "lonsdale",
+      "label": "Lonsdale Enterprises",
+      "sub": "Palantir / 8VC",
+      "type": "donor",
+      "w": 162,
+      "h": 34,
+      "network": "ltf"
+    },
+    {
+      "id": "ltf-hub",
+      "label": "Leading the Future",
+      "meta": "C00916114 · $50.3M raised",
+      "type": "hub-striped",
+      "w": 182,
+      "h": 38,
+      "network": "ltf",
+      "committee_id": "C00916114",
+      "filing_source": "fec",
+      "data_file": "federal/leading-the-future.md"
+    },
+    {
+      "id": "tb",
+      "label": "Think Big",
+      "meta": "C00923417",
+      "type": "pac",
+      "accent": "#3b82f6",
+      "w": 155,
+      "h": 36,
+      "network": "ltf",
+      "committee_id": "C00923417",
+      "filing_source": "fec",
+      "data_file": "federal/think-big.md"
+    },
+    {
+      "id": "bai",
+      "label": "Build American AI",
+      "meta": "501(c)(4) · Dark money",
+      "type": "pac",
+      "accent": "#94a3b8",
+      "w": 155,
+      "h": 36,
+      "network": "ltf"
+    },
+    {
+      "id": "donalds-via",
+      "label": "",
+      "type": "dummy",
+      "w": 1,
+      "h": 1,
+      "network": "ltf"
+    },
+    {
+      "id": "am",
+      "label": "American Mission",
+      "meta": "C00916692",
+      "type": "pac",
+      "accent": "#ef4444",
+      "w": 155,
+      "h": 36,
+      "network": "ltf",
+      "committee_id": "C00916692",
+      "filing_source": "fec",
+      "data_file": "federal/american-mission.md"
+    },
+    {
+      "id": "bores-ltf",
+      "label": "Bores",
+      "sub": "NY-12 · Dem",
+      "type": "cand",
+      "amt": "$1,632,155",
+      "amt_raw": 1632155,
+      "so": "O",
+      "w": 200,
+      "h": 30,
+      "network": "ltf",
+      "state": "NY",
+      "district": "NY-12",
+      "party": "dem"
+    },
+    {
+      "id": "jackson",
+      "label": "Jackson Jr.",
+      "sub": "IL-02 · Dem",
+      "type": "cand",
+      "amt": "$1,117,335",
+      "amt_raw": 1117335,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ltf",
+      "state": "IL",
+      "district": "IL-02",
+      "party": "dem"
+    },
+    {
+      "id": "bean",
+      "label": "Bean",
+      "sub": "IL-08 · Dem",
+      "type": "cand",
+      "amt": "$1,115,646",
+      "amt_raw": 1115646,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ltf",
+      "state": "IL",
+      "district": "IL-08",
+      "party": "dem"
+    },
+    {
+      "id": "donalds",
+      "label": "Donalds",
+      "sub": "FL-Gov · Rep",
+      "type": "cand",
+      "amt": "$5,000,000",
+      "amt_raw": 5000000,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ltf",
+      "state": "FL",
+      "district": "FL-Gov",
+      "party": "rep"
+    },
+    {
+      "id": "gober",
+      "label": "Gober",
+      "sub": "TX-10 · Rep",
+      "type": "cand",
+      "amt": "$747,550",
+      "amt_raw": 747550,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ltf",
+      "state": "TX",
+      "district": "TX-10",
+      "party": "rep"
+    },
+    {
+      "id": "steinmann",
+      "label": "Steinmann",
+      "sub": "TX-08 · Rep",
+      "type": "cand",
+      "amt": "$511,025",
+      "amt_raw": 511025,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ltf",
+      "state": "TX",
+      "district": "TX-08",
+      "party": "rep"
+    },
+    {
+      "id": "buckhout",
+      "label": "Buckhout",
+      "sub": "NC-01 · Rep",
+      "type": "cand",
+      "amt": "$509,067",
+      "amt_raw": 509067,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ltf",
+      "state": "NC",
+      "district": "NC-01",
+      "party": "rep"
+    },
+    {
+      "id": "ant",
+      "label": "Anthropic PBC",
+      "sub": "Major AI company · Safety-focused employees",
+      "type": "donor",
+      "w": 205,
+      "h": 34,
+      "network": "pf"
+    },
+    {
+      "id": "pf-unknown",
+      "label": "Unknown donors",
+      "sub": "$30M from undisclosed sources",
+      "type": "donor",
+      "w": 180,
+      "h": 34,
+      "network": "pf"
+    },
+    {
+      "id": "pf-hub",
+      "label": "Public First Action",
+      "meta": "501(c)(4) · $50M raised · Goal $75M",
+      "type": "hub-striped",
+      "w": 215,
+      "h": 38,
+      "network": "pf",
+      "filing_source": "501c4"
+    },
+    {
+      "id": "jd",
+      "label": "Jobs & Democracy",
+      "meta": "C00928374",
+      "type": "pac",
+      "accent": "#3b82f6",
+      "w": 155,
+      "h": 36,
+      "network": "pf",
+      "committee_id": "C00928374",
+      "filing_source": "fec",
+      "data_file": "federal/jobs-and-democracy-pac.md"
+    },
+    {
+      "id": "dv",
+      "label": "Defending Our Values",
+      "meta": "C00928390",
+      "type": "pac",
+      "accent": "#ef4444",
+      "w": 155,
+      "h": 36,
+      "network": "pf",
+      "committee_id": "C00928390",
+      "filing_source": "fec",
+      "data_file": "federal/defending-our-values-pac.md"
+    },
+    {
+      "id": "foushee",
+      "label": "Foushee",
+      "sub": "NC-04 · Dem",
+      "type": "cand",
+      "amt": "$1,621,658",
+      "amt_raw": 1621658,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "pf",
+      "state": "NC",
+      "district": "NC-04",
+      "party": "dem"
+    },
+    {
+      "id": "bores-pf",
+      "label": "Bores",
+      "sub": "NY-12 · Dem",
+      "type": "cand",
+      "amt": "$295,395",
+      "amt_raw": 295395,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "pf",
+      "state": "NY",
+      "district": "NY-12",
+      "party": "dem"
+    },
+    {
+      "id": "allred",
+      "label": "Allred",
+      "sub": "TX-33 · Dem",
+      "type": "cand",
+      "amt": "$149,926",
+      "amt_raw": 149926,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "pf",
+      "state": "TX",
+      "district": "TX-33",
+      "party": "dem"
+    },
+    {
+      "id": "delacruz",
+      "label": "De La Cruz",
+      "sub": "TX-35 · Rep",
+      "type": "cand",
+      "amt": "$479,730",
+      "amt_raw": 479730,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "pf",
+      "state": "TX",
+      "district": "TX-35",
+      "party": "rep"
+    },
+    {
+      "id": "mealer",
+      "label": "Mealer",
+      "sub": "TX-09 · Rep",
+      "type": "cand",
+      "amt": "$234,485",
+      "amt_raw": 234485,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "pf",
+      "state": "TX",
+      "district": "TX-09",
+      "party": "rep"
+    },
+    {
+      "id": "meta",
+      "label": "Meta Platforms, Inc.",
+      "sub": "Major AI company · Menlo Park, CA",
+      "type": "origin",
+      "w": 160,
+      "h": 34,
+      "network": "ftf"
+    },
+    {
+      "id": "ftf-hub",
+      "label": "Forge the Future",
+      "meta": "TX GPAC · $1.37M raised",
+      "type": "hub",
+      "accent": "#ef4444",
+      "w": 182,
+      "h": 38,
+      "network": "ftf",
+      "filing_source": "tec",
+      "filer_id": "00090684",
+      "data_file": "TX.md"
+    },
+    {
+      "id": "hancock",
+      "label": "Hancock",
+      "sub": "Comptroller · Rep",
+      "type": "cand",
+      "amt": "$495,351",
+      "amt_raw": 495351,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "TX",
+      "district": "TX-Comptroller",
+      "party": "rep"
+    },
+    {
+      "id": "ashby",
+      "label": "Ashby",
+      "sub": "TX SD-3 · Rep",
+      "type": "cand",
+      "amt": "$192,828",
+      "amt_raw": 192828,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "TX",
+      "district": "TX-SD-3",
+      "party": "rep"
+    },
+    {
+      "id": "cook",
+      "label": "Cook",
+      "sub": "TX SD-22 · Rep",
+      "type": "cand",
+      "amt": "$173,816",
+      "amt_raw": 173816,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "TX",
+      "district": "TX-SD-22",
+      "party": "rep"
+    },
+    {
+      "id": "ligon",
+      "label": "Ligon",
+      "sub": "TX SD-4 · Rep",
+      "type": "cand",
+      "amt": "$152,293",
+      "amt_raw": 152293,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "TX",
+      "district": "TX-SD-4",
+      "party": "rep"
+    },
+    {
+      "id": "harris-c",
+      "label": "Harris",
+      "sub": "TX HD-8 · Rep",
+      "type": "cand",
+      "amt": "$38,948",
+      "amt_raw": 38948,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "TX",
+      "district": "TX-HD-8",
+      "party": "rep"
+    },
+    {
+      "id": "heffner",
+      "label": "Heffner",
+      "sub": "TX HD-5 · Rep",
+      "type": "cand",
+      "amt": "$37,993",
+      "amt_raw": 37993,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "TX",
+      "district": "TX-HD-5",
+      "party": "rep"
+    },
+    {
+      "id": "curry",
+      "label": "Curry",
+      "sub": "TX HD-56 · Rep",
+      "type": "cand",
+      "amt": "$30,548",
+      "amt_raw": 30548,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "TX",
+      "district": "TX-HD-56",
+      "party": "rep"
+    },
+    {
+      "id": "meyer",
+      "label": "Meyer",
+      "sub": "TX HD-108 · Rep",
+      "type": "cand",
+      "amt": "$28,668",
+      "amt_raw": 28668,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "TX",
+      "district": "TX-HD-108",
+      "party": "rep"
+    },
+    {
+      "id": "kerwin",
+      "label": "Kerwin",
+      "sub": "TX HD-58 · Rep",
+      "type": "cand",
+      "amt": "$27,732",
+      "amt_raw": 27732,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "TX",
+      "district": "TX-HD-58",
+      "party": "rep"
+    },
+    {
+      "id": "harris-d",
+      "label": "Harris Davila",
+      "sub": "TX HD-52 · Rep",
+      "type": "cand",
+      "amt": "$22,589",
+      "amt_raw": 22589,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "TX",
+      "district": "TX-HD-52",
+      "party": "rep"
+    },
+    {
+      "id": "hull",
+      "label": "Hull",
+      "sub": "TX HD-138 · Rep",
+      "type": "cand",
+      "amt": "$21,394",
+      "amt_raw": 21394,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "TX",
+      "district": "TX-HD-138",
+      "party": "rep"
+    },
+    {
+      "id": "lopez",
+      "label": "Lopez",
+      "sub": "TX HD-37 · Rep",
+      "type": "cand",
+      "amt": "$8,729",
+      "amt_raw": 8729,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "TX",
+      "district": "TX-HD-37",
+      "party": "rep"
+    },
+    {
+      "id": "mot-hub",
+      "label": "Making Our Tomorrow",
+      "meta": "IL Cmte 41081 · $750K raised",
+      "type": "hub",
+      "accent": "#3b82f6",
+      "w": 195,
+      "h": 38,
+      "network": "ftf",
+      "filing_source": "il_sbe",
+      "committee_id": "41081",
+      "data_file": "IL.md"
+    },
+    {
+      "id": "kendrick",
+      "label": "Kendrick",
+      "sub": "IL HD-12 · Dem",
+      "type": "cand",
+      "amt": "$121,613",
+      "amt_raw": 121613,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "IL",
+      "district": "IL-HD-12",
+      "party": "dem"
+    },
+    {
+      "id": "braun",
+      "label": "Braun",
+      "sub": "IL HD-13 · Dem",
+      "type": "cand",
+      "amt": "$84,823",
+      "amt_raw": 84823,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "IL",
+      "district": "IL-HD-13",
+      "party": "dem"
+    },
+    {
+      "id": "kearney",
+      "label": "Kearney",
+      "sub": "IL HD-34 · Dem",
+      "type": "cand",
+      "amt": "$34,735",
+      "amt_raw": 34735,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "IL",
+      "district": "IL-HD-34",
+      "party": "dem"
+    },
+    {
+      "id": "andrade",
+      "label": "Andrade",
+      "sub": "IL HD-40 · Dem",
+      "type": "cand",
+      "amt": "$30,837",
+      "amt_raw": 30837,
+      "so": "S",
+      "w": 200,
+      "h": 30,
+      "network": "ftf",
+      "state": "IL",
+      "district": "IL-HD-40",
+      "party": "dem"
+    }
+  ],
+  "edges": [
+    {
+      "from": "openai",
+      "to": "brk",
+      "label": "",
+      "type": "info",
+      "note": "Greg Brockman was OpenAI president. Advised by OpenAI's Chris Lehane."
+    },
+    {
+      "from": "ma",
+      "to": "a16",
+      "label": "$12.5M",
+      "label_raw": 12500000,
+      "type": "fec",
+      "note": "FEC Schedule A memo item. Partnership attribution — a16z Capital Mgmt filing, C00916114."
+    },
+    {
+      "from": "bh",
+      "to": "a16",
+      "label": "$12.5M",
+      "label_raw": 12500000,
+      "type": "fec",
+      "note": "FEC Schedule A memo item. Partnership attribution — a16z Capital Mgmt filing, C00916114."
+    },
+    {
+      "from": "palantir",
+      "to": "lonsdale",
+      "label": "",
+      "type": "info",
+      "note": "Joe Lonsdale co-founded Palantir Technologies."
+    },
+    {
+      "from": "brk",
+      "to": "ltf-hub",
+      "label": "$25M",
+      "label_raw": 25000000,
+      "type": "fec",
+      "note": "FEC Schedule A, C00916114. Greg & Anna Brockman: $25,000,000."
+    },
+    {
+      "from": "a16",
+      "to": "ltf-hub",
+      "label": "$25M",
+      "label_raw": 25000000,
+      "type": "fec",
+      "note": "FEC Schedule A, C00916114. a16z Capital Mgmt: $25,000,000."
+    },
+    {
+      "from": "perp",
+      "to": "ltf-hub",
+      "label": "$100K",
+      "label_raw": 100000,
+      "type": "fec",
+      "note": "FEC Schedule A, C00916114. Perplexity AI: $100,000."
+    },
+    {
+      "from": "conway",
+      "to": "tb",
+      "label": "$500K",
+      "label_raw": 500000,
+      "type": "fec",
+      "note": "Ron Conway, SV Angel. FEC Schedule A, C00923417, 10/21/2025."
+    },
+    {
+      "from": "ltf-hub",
+      "to": "tb",
+      "label": "$5M",
+      "label_raw": 5000000,
+      "type": "fec",
+      "note": "Transfer 12/15/2025. FEC Schedule A, C00923417."
+    },
+    {
+      "from": "ltf-hub",
+      "to": "bai",
+      "label": "$500K",
+      "label_raw": 500000,
+      "type": "fec",
+      "note": "FEC-disclosed portion. 501(c)(4) may hold more."
+    },
+    {
+      "from": "ltf-hub",
+      "to": "donalds-via",
+      "label": "$5M",
+      "label_raw": 5000000,
+      "type": "rep-support",
+      "note": "NBC News (Feb 12). Direct spending on FL governor's race."
+    },
+    {
+      "from": "donalds-via",
+      "to": "donalds",
+      "label": "",
+      "type": "rep-support",
+      "note": "NBC News (Feb 12). Direct spending on FL governor's race.",
+      "hide": true
+    },
+    {
+      "from": "ltf-hub",
+      "to": "am",
+      "label": "$5M",
+      "label_raw": 5000000,
+      "type": "fec",
+      "note": "Transfer 12/15/2025. FEC Schedule A, C00916692."
+    },
+    {
+      "from": "lonsdale",
+      "to": "am",
+      "label": "$250K",
+      "label_raw": 250000,
+      "type": "fec",
+      "note": "Lonsdale Enterprises. FEC Schedule A, C00916692, 10/03/2025."
+    },
+    {
+      "from": "tb",
+      "to": "bores-ltf",
+      "label": "$1.6M",
+      "label_raw": 1632155,
+      "type": "fec",
+      "note": "FEC Form F24. Opposing Bores (NY-12). Total: $1,632,155.",
+      "auto_update": {
+        "pac_file": "federal/think-big.md",
+        "candidate_match": "BORES",
+        "race": "NY-12",
+        "direction": "OPPOSE"
+      }
+    },
+    {
+      "from": "tb",
+      "to": "jackson",
+      "label": "$1.1M",
+      "label_raw": 1117335,
+      "type": "fec",
+      "note": "FEC Form F24. Supporting Jackson Jr. (IL-02). Total: $1,117,335.",
+      "auto_update": {
+        "pac_file": "federal/think-big.md",
+        "candidate_match": "JACKSON",
+        "race": "IL-02",
+        "direction": "SUPPORT"
+      }
+    },
+    {
+      "from": "tb",
+      "to": "bean",
+      "label": "$1.1M",
+      "label_raw": 1115646,
+      "type": "fec",
+      "note": "FEC Form F24. Supporting Bean (IL-08). Total: $1,115,646.",
+      "auto_update": {
+        "pac_file": "federal/think-big.md",
+        "candidate_match": "BEAN",
+        "race": "IL-08",
+        "direction": "SUPPORT"
+      }
+    },
+    {
+      "from": "am",
+      "to": "gober",
+      "label": "$748K",
+      "label_raw": 747550,
+      "type": "fec",
+      "note": "FEC Form F24. Supporting Gober (TX-10). Total: $747,550.",
+      "auto_update": {
+        "pac_file": "federal/american-mission.md",
+        "candidate_match": "GOBER",
+        "race": "TX-10",
+        "direction": "SUPPORT"
+      }
+    },
+    {
+      "from": "am",
+      "to": "steinmann",
+      "label": "$511K",
+      "label_raw": 511025,
+      "type": "fec",
+      "note": "FEC Form F24. Supporting Steinmann (TX-08). Total: $511,025.",
+      "auto_update": {
+        "pac_file": "federal/american-mission.md",
+        "candidate_match": "STEINMANN",
+        "race": "TX-08",
+        "direction": "SUPPORT"
+      }
+    },
+    {
+      "from": "am",
+      "to": "buckhout",
+      "label": "$509K",
+      "label_raw": 509067,
+      "type": "fec",
+      "note": "FEC Form F24. Supporting Buckhout (NC-01). Total: $509,067.",
+      "auto_update": {
+        "pac_file": "federal/american-mission.md",
+        "candidate_match": "BUCKHOUT",
+        "race": "NC-01",
+        "direction": "SUPPORT"
+      }
+    },
+    {
+      "from": "ant",
+      "to": "pf-hub",
+      "label": "$20M",
+      "label_raw": 20000000,
+      "type": "rep",
+      "note": "Company blog post (Feb 12). Public First Action is 501(c)(4), no FEC filing."
+    },
+    {
+      "from": "pf-unknown",
+      "to": "pf-hub",
+      "label": "$30M",
+      "label_raw": 30000000,
+      "type": "rep",
+      "note": "Public First says it raised $50M total, plans to raise $25M more ($75M goal). $20M from Anthropic; $30M from undisclosed sources. 501(c)(4) — no disclosure required."
+    },
+    {
+      "from": "pf-hub",
+      "to": "jd",
+      "label": "",
+      "type": "rep",
+      "note": "Funding per Business Insider, CNBC (Feb 12)."
+    },
+    {
+      "from": "pf-hub",
+      "to": "dv",
+      "label": "$50K",
+      "label_raw": 50000,
+      "type": "fec",
+      "note": "FEC Schedule A, C00928390. Public First Action, Inc: $50,000."
+    },
+    {
+      "from": "jd",
+      "to": "foushee",
+      "label": "$1.6M",
+      "label_raw": 1621658,
+      "type": "fec",
+      "note": "FEC Form F24. Supporting Foushee (NC-04). Total: $1,621,658.",
+      "auto_update": {
+        "pac_file": "federal/jobs-and-democracy-pac.md",
+        "candidate_match": "FOUSHEE",
+        "race": "NC-04",
+        "direction": "SUPPORT"
+      }
+    },
+    {
+      "from": "jd",
+      "to": "bores-pf",
+      "label": "$295K",
+      "label_raw": 295395,
+      "type": "fec",
+      "note": "FEC Form F24. Supporting Bores (NY-12). Total: $295,395.",
+      "auto_update": {
+        "pac_file": "federal/jobs-and-democracy-pac.md",
+        "candidate_match": "BORES",
+        "race": "NY-12",
+        "direction": "SUPPORT"
+      }
+    },
+    {
+      "from": "jd",
+      "to": "allred",
+      "label": "$150K",
+      "label_raw": 149926,
+      "type": "fec",
+      "note": "FEC Form F24. Supporting Allred (TX-33). Total: $149,926. Digital ad buy + production.",
+      "auto_update": {
+        "pac_file": "federal/jobs-and-democracy-pac.md",
+        "candidate_match": "ALLRED",
+        "race": "TX-33",
+        "direction": "SUPPORT"
+      }
+    },
+    {
+      "from": "dv",
+      "to": "delacruz",
+      "label": "$480K",
+      "label_raw": 479730,
+      "type": "fec",
+      "note": "FEC Form F24. Supporting De La Cruz (TX-35). Total: $479,730.",
+      "auto_update": {
+        "pac_file": "federal/defending-our-values-pac.md",
+        "candidate_match": "DE LA CRUZ",
+        "race": "TX-35",
+        "direction": "SUPPORT"
+      }
+    },
+    {
+      "from": "dv",
+      "to": "mealer",
+      "label": "$234K",
+      "label_raw": 234485,
+      "type": "fec",
+      "note": "FEC Form F24. Supporting Mealer (TX-09). Total: $234,485.",
+      "auto_update": {
+        "pac_file": "federal/defending-our-values-pac.md",
+        "candidate_match": "MEALER",
+        "race": "TX-09",
+        "direction": "SUPPORT"
+      }
+    },
+    {
+      "from": "meta",
+      "to": "mot-hub",
+      "label": "$750K",
+      "label_raw": 750000,
+      "type": "fec",
+      "note": "IL SBE A1List filing. Meta Platforms, Inc.: $750,000 (Feb 12, 2026). Committee ID: 41081.",
+      "auto_update": {
+        "state_file": "IL.md",
+        "section": "contributions",
+        "contributor_match": "Meta"
+      }
+    },
+    {
+      "from": "mot-hub",
+      "to": "kendrick",
+      "label": "$122K",
+      "label_raw": 121613,
+      "type": "fec",
+      "note": "IL SBE B1List filings. Digital ads & mailing supporting Paul Kendrick (HD-12). Total: $121,613.",
+      "auto_update": {
+        "state_file": "IL.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Paul Kendrick"
+      }
+    },
+    {
+      "from": "mot-hub",
+      "to": "braun",
+      "label": "$85K",
+      "label_raw": 84823,
+      "type": "fec",
+      "note": "IL SBE B1List filings. Digital ads & mailing supporting Adam Braun (HD-13). Total: $84,823.",
+      "auto_update": {
+        "state_file": "IL.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Adam Braun"
+      }
+    },
+    {
+      "from": "mot-hub",
+      "to": "kearney",
+      "label": "$35K",
+      "label_raw": 34735,
+      "type": "fec",
+      "note": "IL SBE B1List filings. Digital ads & mailing supporting Aja Kearney (HD-34). Total: $34,735.",
+      "auto_update": {
+        "state_file": "IL.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Aja Kearney"
+      }
+    },
+    {
+      "from": "mot-hub",
+      "to": "andrade",
+      "label": "$31K",
+      "label_raw": 30837,
+      "type": "fec",
+      "note": "IL SBE B1List filings. Digital ads & mailing supporting Jaime Andrade (HD-40). Total: $30,837.",
+      "auto_update": {
+        "state_file": "IL.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Jaime Andrade"
+      }
+    },
+    {
+      "from": "meta",
+      "to": "ftf-hub",
+      "label": "$1.37M",
+      "label_raw": 1365000,
+      "type": "fec",
+      "note": "TX Ethics Commission 8-day filing (Feb 23, 2026). Three contributions: $750K (Feb 12), $600K (Feb 17), $15K (Feb 20).",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "contributions",
+        "contributor_match": "Meta"
+      }
+    },
+    {
+      "from": "ftf-hub",
+      "to": "hancock",
+      "label": "$495K",
+      "label_raw": 495351,
+      "type": "fec",
+      "note": "TX GPAC filing. Digital ads supporting Kelly Hancock (Comptroller). Total: $495,351.",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Kelly Hancock"
+      }
+    },
+    {
+      "from": "ftf-hub",
+      "to": "ashby",
+      "label": "$193K",
+      "label_raw": 192828,
+      "type": "fec",
+      "note": "TX GPAC filing. Ads, mailings, phone calls supporting Trent Ashby (SD-3). Total: $192,828.",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Trent Ashby"
+      }
+    },
+    {
+      "from": "ftf-hub",
+      "to": "cook",
+      "label": "$174K",
+      "label_raw": 173816,
+      "type": "fec",
+      "note": "TX GPAC filing. Ads, mailings, phone calls supporting David Cook (SD-22). Total: $173,816.",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "David Cook"
+      }
+    },
+    {
+      "from": "ftf-hub",
+      "to": "ligon",
+      "label": "$152K",
+      "label_raw": 152293,
+      "type": "fec",
+      "note": "TX GPAC filing. Ads, mailings, phone calls supporting Brett Ligon (SD-4). Total: $152,293.",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Brett Ligon"
+      }
+    },
+    {
+      "from": "ftf-hub",
+      "to": "harris-c",
+      "label": "$39K",
+      "label_raw": 38948,
+      "type": "fec",
+      "note": "TX GPAC filing. Mailings, phone calls supporting Cody Harris (HD-8). Total: $38,948.",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Cody Harris"
+      }
+    },
+    {
+      "from": "ftf-hub",
+      "to": "heffner",
+      "label": "$38K",
+      "label_raw": 37993,
+      "type": "fec",
+      "note": "TX GPAC filing. Mailings, phone calls supporting Cole Heffner (HD-5). Total: $37,993.",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Cole Heffner"
+      }
+    },
+    {
+      "from": "ftf-hub",
+      "to": "curry",
+      "label": "$31K",
+      "label_raw": 30548,
+      "type": "fec",
+      "note": "TX GPAC filing. Mailings, phone calls supporting Pat Curry (HD-56). Total: $30,548.",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Pat Curry"
+      }
+    },
+    {
+      "from": "ftf-hub",
+      "to": "meyer",
+      "label": "$29K",
+      "label_raw": 28668,
+      "type": "fec",
+      "note": "TX GPAC filing. Mailings, phone calls supporting Morgan Meyer (HD-108). Total: $28,668.",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Morgan Meyer"
+      }
+    },
+    {
+      "from": "ftf-hub",
+      "to": "kerwin",
+      "label": "$28K",
+      "label_raw": 27732,
+      "type": "fec",
+      "note": "TX GPAC filing. Mailings, phone calls supporting Helen Kerwin (HD-58). Total: $27,732.",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Helen Kerwin"
+      }
+    },
+    {
+      "from": "ftf-hub",
+      "to": "harris-d",
+      "label": "$23K",
+      "label_raw": 22589,
+      "type": "fec",
+      "note": "TX GPAC filing. Mailings, phone calls supporting Caroline Harris Davila (HD-52). Total: $22,589.",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Caroline Harris Davila"
+      }
+    },
+    {
+      "from": "ftf-hub",
+      "to": "hull",
+      "label": "$21K",
+      "label_raw": 21394,
+      "type": "fec",
+      "note": "TX GPAC filing. Mailings, phone calls supporting Lacey Hull (HD-138). Total: $21,394.",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Lacey Hull"
+      }
+    },
+    {
+      "from": "ftf-hub",
+      "to": "lopez",
+      "label": "$9K",
+      "label_raw": 8729,
+      "type": "fec",
+      "note": "TX GPAC filing. Mailings, phone calls supporting Janie Lopez (HD-37). Total: $8,729.",
+      "auto_update": {
+        "state_file": "TX.md",
+        "section": "spending_by_candidate",
+        "candidate_match": "Janie Lopez"
+      }
+    }
+  ]
+}

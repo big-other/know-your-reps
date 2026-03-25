@@ -74,6 +74,7 @@ export interface PacContribution {
   parent_company: string;
   amount: number;
   fec_id: string;
+  supportOppose?: "support" | "oppose";
 }
 
 export interface PacRecipient {

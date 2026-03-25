@@ -12,6 +12,32 @@ function formatMoney(amount: number): string {
   }).format(amount);
 }
 
+function formatCompact(amount: number): string {
+  if (amount >= 1000000) {
+    return `$${(amount / 1000000).toFixed(1)}M`;
+  }
+  if (amount >= 1000) {
+    return `$${Math.round(amount / 1000)}K`;
+  }
+  return `$${amount}`;
+}
+
+function getBadgeInfo(contributions: PacContribution[]): {
+  label: string;
+  allOppose: boolean;
+} {
+  const hasOppose = contributions.some((c) => c.supportOppose === "oppose");
+  const hasSupport = contributions.some((c) => c.supportOppose === "support");
+
+  if (hasOppose && !hasSupport) {
+    return { label: "AI PAC OPPOSITION", allOppose: true };
+  }
+  if (hasOppose && hasSupport) {
+    return { label: "AI PAC SPENDING", allOppose: false };
+  }
+  return { label: "AI PAC SUPPORT", allOppose: false };
+}
+
 export function PacBadge({
   contributions,
   totalAmount,
@@ -20,14 +46,19 @@ export function PacBadge({
   totalAmount: number;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const { label, allOppose } = getBadgeInfo(contributions);
 
   return (
     <div className="relative inline-block">
       <button
         onClick={() => setExpanded(!expanded)}
-        className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-danger text-white text-xs font-semibold rounded-full hover:bg-danger/90 transition-all duration-200 cursor-pointer hover:shadow-sm active:scale-95"
+        className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-white text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer hover:shadow-sm active:scale-95 ${
+          allOppose
+            ? "bg-dark-mid hover:bg-dark-warm"
+            : "bg-danger hover:bg-danger/90"
+        }`}
         aria-expanded={expanded}
-        aria-label={`Took ${formatMoney(totalAmount)} from AI PACs. Click for details.`}
+        aria-label={`${formatCompact(totalAmount)} in AI PAC spending. Click for details.`}
       >
         <svg
           className="w-3 h-3"
@@ -41,25 +72,42 @@ export function PacBadge({
             clipRule="evenodd"
           />
         </svg>
-        TOOK AI PAC MONEY
+        {formatCompact(totalAmount)} {label}
       </button>
 
       {expanded && (
-        <div className="absolute z-10 mt-2 left-0 w-72 bg-paper border border-stone rounded-xl shadow-lg p-4 animate-scale-in">
-          <h4 className="font-display text-base text-dark-warm mb-2">
-            AI Industry PAC Contributions
+        <div className="absolute z-10 mt-2 left-0 w-80 bg-paper border border-stone rounded-xl shadow-lg p-4 animate-scale-in">
+          <h4 className="font-display text-base text-dark-warm mb-1">
+            AI Industry Spending
           </h4>
           <p className="text-xs text-muted mb-3">
-            Total: {formatMoney(totalAmount)}
+            Independent expenditures — Total: {formatMoney(totalAmount)}
           </p>
           <ul className="space-y-2">
             {contributions.map((c, i) => (
-              <li
-                key={i}
-                className="flex justify-between items-center text-xs"
-              >
-                <span className="text-dark-mid">{c.parent_company}</span>
-                <span className="font-semibold text-danger">
+              <li key={i} className="flex justify-between items-start gap-2 text-xs">
+                <div className="min-w-0">
+                  <span className="text-dark-warm font-medium block">
+                    {c.pac_name}
+                  </span>
+                  <span
+                    className={`text-xs ${
+                      c.supportOppose === "oppose"
+                        ? "text-dark-mid"
+                        : "text-saffron"
+                    }`}
+                  >
+                    {c.supportOppose === "oppose" ? "opposing" : "supporting"}
+                    {c.parent_company !== c.pac_name && (
+                      <> &middot; {c.parent_company}</>
+                    )}
+                  </span>
+                </div>
+                <span
+                  className={`font-semibold shrink-0 ${
+                    c.supportOppose === "oppose" ? "text-dark-mid" : "text-danger"
+                  }`}
+                >
                   {formatMoney(c.amount)}
                 </span>
               </li>
