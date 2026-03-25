@@ -23,17 +23,17 @@ export function Footer() {
               <ul className="space-y-1 text-muted">
                 <li>
                   <a
-                    href="https://humansfirst.org"
+                    href="https://humansfirst.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-nearblack transition-colors"
                   >
-                    humansfirst.org
+                    humansfirst.com
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://www.humansfirst.org/ai-spending"
+                    href="https://www.humansfirst.com/ai-spending"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-nearblack transition-colors"

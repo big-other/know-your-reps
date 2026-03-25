@@ -154,12 +154,12 @@ function LookupResults() {
               </ul>
             )}
             <a
-              href="https://www.humansfirst.org/ai-spending"
+              href="https://www.humansfirst.com/ai-spending"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-danger font-medium underline hover:no-underline"
             >
-              See full AI spending data at humansfirst.org
+              See full AI spending data at humansfirst.com
             </a>
           </div>
         </section>

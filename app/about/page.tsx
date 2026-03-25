@@ -13,7 +13,7 @@ export default function AboutPage() {
           <p className="text-sm">
             Know Your Reps is a free, nonpartisan civic tool built by{" "}
             <a
-              href="https://humansfirst.org"
+              href="https://humansfirst.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-saffron-dark underline hover:no-underline"
@@ -78,12 +78,12 @@ export default function AboutPage() {
               PACs is maintained by the Humans First research team based on
               public FEC filings and corporate disclosures. See the full list at{" "}
               <a
-                href="https://www.humansfirst.org/ai-spending"
+                href="https://www.humansfirst.com/ai-spending"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-saffron-dark underline hover:no-underline"
               >
-                humansfirst.org/ai-spending
+                humansfirst.com/ai-spending
               </a>
               .
             </li>
@@ -130,12 +130,12 @@ export default function AboutPage() {
             workplaces, and public institutions, citizens deserve transparency
             about how AI companies influence democratic processes. Learn more at{" "}
             <a
-              href="https://humansfirst.org"
+              href="https://humansfirst.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-saffron-dark underline hover:no-underline"
             >
-              humansfirst.org
+              humansfirst.com
             </a>
             .
           </p>

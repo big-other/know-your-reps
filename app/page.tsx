@@ -23,12 +23,12 @@ export default function Home() {
           make informed decisions at the ballot box.
         </p>
         <a
-          href="https://humansfirst.org"
+          href="https://humansfirst.com"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block mt-4 text-sm text-saffron-dark hover:text-saffron font-medium transition-colors"
         >
-          Learn more at humansfirst.org
+          Learn more at humansfirst.com
         </a>
       </div>
     </div>

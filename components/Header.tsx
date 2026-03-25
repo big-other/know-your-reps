@@ -28,12 +28,12 @@ export function Header() {
             About
           </Link>
           <a
-            href="https://humansfirst.org"
+            href="https://humansfirst.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted hover:text-nearblack transition-colors"
           >
-            humansfirst.org
+            humansfirst.com
           </a>
         </nav>
       </div>
