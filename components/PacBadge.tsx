@@ -94,7 +94,7 @@ export function PacBadge({
                     className={`text-xs ${
                       c.supportOppose === "oppose"
                         ? "text-dark-mid"
-                        : "text-saffron"
+                        : "text-navy"
                     }`}
                   >
                     {c.supportOppose === "oppose" ? "opposing" : "supporting"}
@@ -132,7 +132,7 @@ export function PacBadge({
 
 export function ElectionBadge() {
   return (
-    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-saffron text-white text-xs font-semibold rounded-full font-[family-name:var(--font-body)]">
+    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-navy text-white text-xs font-semibold rounded-full font-[family-name:var(--font-body)]">
       UP FOR ELECTION 2026
     </span>
   );

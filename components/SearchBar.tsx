@@ -21,7 +21,7 @@ export function SearchBar({ initialQuery = "" }: { initialQuery?: string }) {
       <div
         className={`flex gap-2 p-1.5 rounded-xl border transition-all duration-200 ${
           focused
-            ? "border-saffron/60 shadow-[0_0_0_3px_rgba(212,160,32,0.1)]"
+            ? "border-navy/60 shadow-[0_0_0_3px_rgba(27,54,93,0.1)]"
             : "border-stone bg-white/80"
         }`}
       >

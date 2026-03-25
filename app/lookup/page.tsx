@@ -83,7 +83,7 @@ function LookupResults() {
     <div className="space-y-12">
       {/* Multiple districts warning */}
       {data.multipleDistricts && (
-        <div className="bg-saffron/8 border border-saffron/25 rounded-xl p-4 text-sm text-dark-mid animate-fade-in">
+        <div className="bg-navy/8 border border-navy/25 rounded-xl p-4 text-sm text-dark-mid animate-fade-in">
           Your zip code spans multiple congressional districts. We&apos;re
           showing the most likely match. For a precise result, enter your full
           street address.

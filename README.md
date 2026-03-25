@@ -148,7 +148,7 @@ Vercel environment variables (Geocodio key, FEC key) are set via the Vercel dash
 
 ## Design System
 
-- **Color palette:** Dark Warm `#2C231C`, Dark Mid `#3D3328`, Stone `#C9BFB0`, Linen `#EDE6DA`, Paper `#F6F2EB`, Saffron (election badge), Danger (PAC badge)
+- **Color palette:** Dark Warm `#2C231C`, Dark Mid `#3D3328`, Stone `#C9BFB0`, Linen `#EDE6DA`, Paper `#F6F2EB`, Navy `#1B365D` (election badge, accents), Danger `#C23B22` (PAC badge)
 - **Fonts:** Instrument Serif (display/headlines), DM Sans (body/UI)
 - **Animations:** Fade-in, slide-down, scale-in, stagger-children (defined in `app/globals.css`)
 
