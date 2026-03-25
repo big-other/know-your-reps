@@ -1,0 +1,62 @@
+{
+  "pacs": [
+    {
+      "name": "Google NetPAC (Alphabet)",
+      "fec_id": "C00428623",
+      "parent_company": "Alphabet/Google"
+    },
+    {
+      "name": "Microsoft Corporation PAC (MSPAC)",
+      "fec_id": "C00227546",
+      "parent_company": "Microsoft"
+    },
+    {
+      "name": "Amazon.com Inc PAC",
+      "fec_id": "C00360354",
+      "parent_company": "Amazon"
+    },
+    {
+      "name": "Meta Platforms Inc PAC",
+      "fec_id": "C00502906",
+      "parent_company": "Meta"
+    },
+    {
+      "name": "Apple Inc. PAC (APPLEPAC)",
+      "fec_id": "C00435099",
+      "parent_company": "Apple"
+    },
+    {
+      "name": "OpenAI Inc PAC",
+      "fec_id": null,
+      "parent_company": "OpenAI",
+      "note": "Check FEC for new filings — OpenAI may register a PAC for 2026 cycle"
+    },
+    {
+      "name": "NVIDIA Corporation PAC",
+      "fec_id": "C00476036",
+      "parent_company": "NVIDIA"
+    },
+    {
+      "name": "Palantir Technologies PAC",
+      "fec_id": "C00770941",
+      "parent_company": "Palantir"
+    },
+    {
+      "name": "Oracle Corporation PAC",
+      "fec_id": "C00300707",
+      "parent_company": "Oracle"
+    },
+    {
+      "name": "Salesforce.com PAC",
+      "fec_id": "C00508507",
+      "parent_company": "Salesforce"
+    },
+    {
+      "name": "IBM Corporation PAC",
+      "fec_id": "C00104299",
+      "parent_company": "IBM"
+    }
+  ],
+  "last_updated": "2026-03-24",
+  "source_url": "https://www.humansfirst.com/ai-spending"
+}
