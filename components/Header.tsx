@@ -7,7 +7,7 @@ export function Header() {
     <header className="border-b border-stone/60 bg-paper/90 backdrop-blur-md sticky top-0 z-50">
       <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 bg-dark-warm rounded-sm flex items-center justify-center group-hover:bg-navy transition-colors duration-200">
+          <div className="w-8 h-8 bg-dark-warm rounded-sm flex items-center justify-center group-hover:bg-accent transition-colors duration-200">
             <span className="text-paper font-bold text-sm font-[family-name:var(--font-body)]">HF</span>
           </div>
           <span className="font-display text-dark-warm text-xl">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import type { PacContribution } from "@/lib/types";
 
 function formatMoney(amount: number): string {
@@ -47,10 +47,33 @@ export function PacBadge({
 }) {
   const [expanded, setExpanded] = useState(false);
   const { label, allOppose } = getBadgeInfo(contributions);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [popupStyle, setPopupStyle] = useState<React.CSSProperties>({});
+
+  useEffect(() => {
+    if (expanded && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      const popupWidth = 320;
+      // Position below the button, clamped to viewport
+      let left = rect.left;
+      if (left + popupWidth > window.innerWidth - 16) {
+        left = window.innerWidth - popupWidth - 16;
+      }
+      if (left < 16) left = 16;
+
+      setPopupStyle({
+        position: "fixed",
+        top: rect.bottom + 8,
+        left,
+        width: popupWidth,
+      });
+    }
+  }, [expanded]);
 
   return (
     <div className="relative inline-block">
       <button
+        ref={buttonRef}
         onClick={() => setExpanded(!expanded)}
         className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-white text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer hover:shadow-sm active:scale-95 ${
           allOppose
@@ -76,55 +99,66 @@ export function PacBadge({
       </button>
 
       {expanded && (
-        <div className="absolute z-10 mt-2 left-0 w-80 bg-paper border border-stone rounded-xl shadow-lg p-4 animate-scale-in">
-          <h4 className="font-display text-base text-dark-warm mb-1">
-            AI Industry Spending
-          </h4>
-          <p className="text-xs text-muted mb-3">
-            Independent expenditures — Total: {formatMoney(totalAmount)}
-          </p>
-          <ul className="space-y-2">
-            {contributions.map((c, i) => (
-              <li key={i} className="flex justify-between items-start gap-2 text-xs">
-                <div className="min-w-0">
-                  <span className="text-dark-warm font-medium block">
-                    {c.pac_name}
-                  </span>
+        <>
+          {/* Invisible backdrop to catch outside clicks */}
+          <div
+            className="fixed inset-0 z-[999]"
+            onClick={() => setExpanded(false)}
+          />
+          {/* Popup rendered fixed so it escapes all parent overflow/stacking */}
+          <div
+            className="z-[1000] bg-paper border border-stone rounded-xl shadow-xl p-4 animate-scale-in"
+            style={popupStyle}
+          >
+            <h4 className="font-display text-base text-dark-warm mb-1">
+              AI Industry Spending
+            </h4>
+            <p className="text-xs text-muted mb-3">
+              Independent expenditures — Total: {formatMoney(totalAmount)}
+            </p>
+            <ul className="space-y-2">
+              {contributions.map((c, i) => (
+                <li key={i} className="flex justify-between items-start gap-2 text-xs">
+                  <div className="min-w-0">
+                    <span className="text-dark-warm font-medium block">
+                      {c.pac_name}
+                    </span>
+                    <span
+                      className={`text-xs ${
+                        c.supportOppose === "oppose"
+                          ? "text-dark-mid"
+                          : "text-accent"
+                      }`}
+                    >
+                      {c.supportOppose === "oppose" ? "opposing" : "supporting"}
+                      {c.parent_company !== c.pac_name && (
+                        <> &middot; {c.parent_company}</>
+                      )}
+                    </span>
+                  </div>
                   <span
-                    className={`text-xs ${
-                      c.supportOppose === "oppose"
-                        ? "text-dark-mid"
-                        : "text-navy"
+                    className={`font-semibold shrink-0 ${
+                      c.supportOppose === "oppose" ? "text-dark-mid" : "text-danger"
                     }`}
                   >
-                    {c.supportOppose === "oppose" ? "opposing" : "supporting"}
-                    {c.parent_company !== c.pac_name && (
-                      <> &middot; {c.parent_company}</>
-                    )}
+                    {formatMoney(c.amount)}
                   </span>
-                </div>
-                <span
-                  className={`font-semibold shrink-0 ${
-                    c.supportOppose === "oppose" ? "text-dark-mid" : "text-danger"
-                  }`}
-                >
-                  {formatMoney(c.amount)}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-3 text-xs text-muted">
-            Source:{" "}
-            <a
-              href="https://www.humansfirst.com/ai-spending"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-dark-warm transition-colors duration-200"
-            >
-              Humans First AI Spending Tracker
-            </a>
-          </p>
-        </div>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 text-xs text-muted">
+              Source:{" "}
+              <a
+                href="https://www.humansfirst.com/ai-spending"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-dark-warm transition-colors duration-200"
+              >
+                Humans First AI Spending Tracker
+              </a>
+            </p>
+          </div>
+        </>
       )}
     </div>
   );
@@ -132,7 +166,7 @@ export function PacBadge({
 
 export function ElectionBadge() {
   return (
-    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-navy text-white text-xs font-semibold rounded-full font-[family-name:var(--font-body)]">
+    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-accent text-white text-xs font-semibold rounded-full font-[family-name:var(--font-body)]">
       UP FOR ELECTION 2026
     </span>
   );
