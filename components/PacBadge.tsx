@@ -25,7 +25,7 @@ export function PacBadge({
     <div className="relative inline-block">
       <button
         onClick={() => setExpanded(!expanded)}
-        className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-danger text-white text-xs font-semibold rounded-full hover:bg-danger/90 transition-colors cursor-pointer"
+        className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-danger text-white text-xs font-semibold rounded-full hover:bg-danger/90 transition-all duration-200 cursor-pointer hover:shadow-sm active:scale-95"
         aria-expanded={expanded}
         aria-label={`Took ${formatMoney(totalAmount)} from AI PACs. Click for details.`}
       >
@@ -45,8 +45,8 @@ export function PacBadge({
       </button>
 
       {expanded && (
-        <div className="absolute z-10 mt-2 left-0 w-72 bg-white border border-border rounded-lg shadow-lg p-4">
-          <h4 className="font-semibold text-sm text-nearblack mb-2">
+        <div className="absolute z-10 mt-2 left-0 w-72 bg-paper border border-stone rounded-xl shadow-lg p-4 animate-scale-in">
+          <h4 className="font-display text-base text-dark-warm mb-2">
             AI Industry PAC Contributions
           </h4>
           <p className="text-xs text-muted mb-3">
@@ -58,8 +58,8 @@ export function PacBadge({
                 key={i}
                 className="flex justify-between items-center text-xs"
               >
-                <span className="text-dark">{c.parent_company}</span>
-                <span className="font-medium text-danger">
+                <span className="text-dark-mid">{c.parent_company}</span>
+                <span className="font-semibold text-danger">
                   {formatMoney(c.amount)}
                 </span>
               </li>
@@ -71,7 +71,7 @@ export function PacBadge({
               href="https://www.humansfirst.com/ai-spending"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-nearblack"
+              className="underline hover:text-dark-warm transition-colors duration-200"
             >
               Humans First AI Spending Tracker
             </a>
@@ -84,7 +84,7 @@ export function PacBadge({
 
 export function ElectionBadge() {
   return (
-    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-saffron text-white text-xs font-semibold rounded-full">
+    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-saffron text-white text-xs font-semibold rounded-full font-[family-name:var(--font-body)]">
       UP FOR ELECTION 2026
     </span>
   );

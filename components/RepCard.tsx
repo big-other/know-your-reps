@@ -44,7 +44,7 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
   const hasContactInfo = rep.phone || rep.website || rep.contactForm || rep.address || rep.email || rep.social?.twitter;
 
   return (
-    <div className="bg-white rounded-lg border border-border overflow-hidden">
+    <div className="bg-white rounded-xl border border-stone/50 overflow-hidden hover:border-stone transition-colors duration-200 hover:shadow-sm">
       <div className="p-4 flex gap-4">
         {/* Photo */}
         <div className="shrink-0">
@@ -52,14 +52,14 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
             <img
               src={rep.photoUrl}
               alt={`Photo of ${rep.name}`}
-              className="w-20 h-24 object-cover rounded bg-surface"
+              className="w-20 h-24 object-cover rounded-lg bg-linen"
               onError={() => setImgError(true)}
               referrerPolicy="no-referrer"
             />
           ) : (
-            <div className="w-20 h-24 bg-surface rounded flex items-center justify-center">
+            <div className="w-20 h-24 bg-linen rounded-lg flex items-center justify-center">
               <svg
-                className="w-10 h-10 text-muted"
+                className="w-10 h-10 text-stone"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -73,19 +73,19 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
         {/* Info */}
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-start gap-2 mb-1">
-            <h3 className="font-semibold text-nearblack">{rep.name}</h3>
-            <span className="text-xs px-2 py-0.5 bg-surface rounded text-muted">
+            <h3 className="font-display text-lg text-dark-warm">{rep.name}</h3>
+            <span className="text-xs px-2 py-0.5 bg-linen rounded-full text-muted font-[family-name:var(--font-body)]">
               {rep.party}
             </span>
           </div>
 
-          <p className="text-sm text-muted mb-2">
+          <p className="text-sm text-muted mb-2.5">
             {rep.title}
             {rep.district ? ` — ${rep.district}` : ""}
           </p>
 
           {/* Badges */}
-          <div className="flex flex-wrap gap-2 mb-2">
+          <div className="flex flex-wrap gap-2 mb-2.5">
             {rep.upForElection2026 && <ElectionBadge />}
             {rep.pacMoney && rep.pacMoney.length > 0 && rep.totalPacMoney && (
               <PacBadge
@@ -99,11 +99,11 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
           {hasContactInfo && (
             <button
               onClick={() => setShowContact(!showContact)}
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-saffron-dark hover:text-saffron transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-dark-mid hover:text-dark-warm transition-colors duration-200 cursor-pointer group"
               aria-expanded={showContact}
             >
               <svg
-                className={`w-3.5 h-3.5 transition-transform ${showContact ? "rotate-90" : ""}`}
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${showContact ? "rotate-90" : ""}`}
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2}
@@ -112,7 +112,7 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
               </svg>
-              {showContact ? "Hide contact info" : "View contact info"}
+              <span className="group-hover:underline">{showContact ? "Hide contact info" : "View contact info"}</span>
             </button>
           )}
         </div>
@@ -120,14 +120,14 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
 
       {/* Contact details panel */}
       {showContact && hasContactInfo && (
-        <div className="border-t border-border bg-offwhite px-4 py-3">
+        <div className="border-t border-stone/30 bg-linen/50 px-4 py-3 animate-slide-down">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {rep.phone && (
               <a
                 href={`tel:${rep.phone}`}
-                className="flex items-center gap-2 text-sm text-dark hover:text-nearblack transition-colors"
+                className="flex items-center gap-2 text-sm text-dark-mid hover:text-dark-warm transition-colors duration-200"
               >
-                <PhoneIcon className="w-4 h-4 text-muted shrink-0" />
+                <PhoneIcon className="w-4 h-4 text-stone shrink-0" />
                 {rep.phone}
               </a>
             )}
@@ -135,9 +135,9 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
             {rep.email && (
               <a
                 href={`mailto:${rep.email}`}
-                className="flex items-center gap-2 text-sm text-dark hover:text-nearblack transition-colors"
+                className="flex items-center gap-2 text-sm text-dark-mid hover:text-dark-warm transition-colors duration-200"
               >
-                <EnvelopeIcon className="w-4 h-4 text-muted shrink-0" />
+                <EnvelopeIcon className="w-4 h-4 text-stone shrink-0" />
                 {rep.email}
               </a>
             )}
@@ -147,9 +147,9 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
                 href={rep.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-dark hover:text-nearblack transition-colors"
+                className="flex items-center gap-2 text-sm text-dark-mid hover:text-dark-warm transition-colors duration-200"
               >
-                <GlobeIcon className="w-4 h-4 text-muted shrink-0" />
+                <GlobeIcon className="w-4 h-4 text-stone shrink-0" />
                 Website
               </a>
             )}
@@ -159,9 +159,9 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
                 href={rep.contactForm}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-dark hover:text-nearblack transition-colors"
+                className="flex items-center gap-2 text-sm text-dark-mid hover:text-dark-warm transition-colors duration-200"
               >
-                <EnvelopeIcon className="w-4 h-4 text-muted shrink-0" />
+                <EnvelopeIcon className="w-4 h-4 text-stone shrink-0" />
                 Contact Form
               </a>
             )}
@@ -171,9 +171,9 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
                 href={`https://twitter.com/${rep.social.twitter}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-dark hover:text-nearblack transition-colors"
+                className="flex items-center gap-2 text-sm text-dark-mid hover:text-dark-warm transition-colors duration-200"
               >
-                <svg className="w-4 h-4 text-muted shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <svg className="w-4 h-4 text-stone shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
                 @{rep.social.twitter}
@@ -185,9 +185,9 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
                 href={`https://facebook.com/${rep.social.facebook}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-dark hover:text-nearblack transition-colors"
+                className="flex items-center gap-2 text-sm text-dark-mid hover:text-dark-warm transition-colors duration-200"
               >
-                <svg className="w-4 h-4 text-muted shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <svg className="w-4 h-4 text-stone shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                 </svg>
                 Facebook
@@ -196,7 +196,7 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
           </div>
 
           {rep.address && (
-            <div className="flex items-start gap-2 text-sm text-muted mt-2.5 pt-2.5 border-t border-border">
+            <div className="flex items-start gap-2 text-sm text-muted mt-2.5 pt-2.5 border-t border-stone/30">
               <MapPinIcon className="w-4 h-4 shrink-0 mt-0.5" />
               <span>{rep.address}</span>
             </div>

@@ -4,26 +4,86 @@
   --color-saffron: #D4A020;
   --color-saffron-light: #E8C44A;
   --color-saffron-dark: #B88A15;
-  --color-offwhite: #F5F2EB;
-  --color-nearblack: #1A1A1A;
-  --color-dark: #2C2C2C;
-  --color-muted: #6B6B6B;
-  --color-border: #D4D0C8;
-  --color-surface: #E8E4DC;
+  --color-dark-warm: #2C231C;
+  --color-dark-mid: #3D3328;
+  --color-stone: #C9BFB0;
+  --color-linen: #EDE6DA;
+  --color-paper: #F6F2EB;
+  --color-muted: #7A7062;
   --color-danger: #C23B22;
   --color-danger-light: #F5E6E3;
+
+  /* Semantic aliases */
+  --color-nearblack: #2C231C;
+  --color-dark: #3D3328;
+  --color-border: #C9BFB0;
+  --color-surface: #EDE6DA;
+  --color-offwhite: #F6F2EB;
+
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-body: "DM Sans", system-ui, -apple-system, sans-serif;
 }
 
 body {
-  background-color: var(--color-offwhite);
-  color: var(--color-nearblack);
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background-color: var(--color-paper);
+  color: var(--color-dark-warm);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-fast {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; }
+  to { opacity: 1; max-height: 500px; }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out both;
+}
+
+.animate-fade-in-fast {
+  animation: fade-in-fast 0.2s ease-out both;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out both;
+  overflow: hidden;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out both;
+}
+
+/* Stagger children animations */
+.stagger-children > * {
+  animation: fade-in 0.4s ease-out both;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 360ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 420ms; }
+
+/* Heading font */
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
 }
