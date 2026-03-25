@@ -46,9 +46,8 @@ function legislatorToCard(
     if (chamber === "upper") upForElection = true;
   }
 
-  const photoUrl = leg.type === "representative" || leg.type === "senator"
-    ? `https://theunitedstates.io/images/congress/225x275/${leg.references?.bioguide_id}.jpg`
-    : undefined;
+  // Use photo_url from Geocodio bio (congress.gov or state legislature sites)
+  const photoUrl = leg.bio.photo_url || undefined;
 
   return {
     name,
@@ -60,10 +59,12 @@ function legislatorToCard(
     chamber,
     district: districtInfo,
     state,
-    photoUrl: leg.references?.bioguide_id ? photoUrl : undefined,
+    photoUrl,
     phone: leg.contact.phone || undefined,
     website: leg.contact.url || undefined,
     contactForm: leg.contact.contact_form || undefined,
+    address: leg.contact.address || undefined,
+    email: leg.contact.email || undefined,
     social: leg.social
       ? { twitter: leg.social.twitter, facebook: leg.social.facebook }
       : undefined,

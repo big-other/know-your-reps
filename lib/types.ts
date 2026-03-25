@@ -6,12 +6,14 @@ export interface Legislator {
     birthday?: string;
     gender?: string;
     party: string;
+    photo_url?: string;
   };
   contact: {
     url?: string;
     address?: string;
     phone?: string;
     contact_form?: string;
+    email?: string;
   };
   social?: {
     twitter?: string;
@@ -95,6 +97,8 @@ export interface RepresentativeCard {
   phone?: string;
   website?: string;
   contactForm?: string;
+  address?: string;
+  email?: string;
   social?: {
     twitter?: string;
     facebook?: string;
