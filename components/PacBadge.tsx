@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
+import { createPortal } from "react-dom";
 import type { PacContribution } from "@/lib/types";
 
 function formatMoney(amount: number): string {
@@ -46,36 +47,30 @@ export function PacBadge({
   totalAmount: number;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const [popupPos, setPopupPos] = useState({ top: 0, left: 0 });
   const { label, allOppose } = getBadgeInfo(contributions);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const [popupStyle, setPopupStyle] = useState<React.CSSProperties>({});
 
-  useEffect(() => {
-    if (expanded && buttonRef.current) {
+  function handleToggle() {
+    if (!expanded && buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
       const popupWidth = 320;
-      // Position below the button, clamped to viewport
       let left = rect.left;
       if (left + popupWidth > window.innerWidth - 16) {
         left = window.innerWidth - popupWidth - 16;
       }
       if (left < 16) left = 16;
-
-      setPopupStyle({
-        position: "fixed",
-        top: rect.bottom + 8,
-        left,
-        width: popupWidth,
-      });
+      setPopupPos({ top: rect.bottom + 8, left });
     }
-  }, [expanded]);
+    setExpanded(!expanded);
+  }
 
   return (
     <div className="relative inline-block">
       <button
         ref={buttonRef}
-        onClick={() => setExpanded(!expanded)}
-        className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-white text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer hover:shadow-sm active:scale-95 ${
+        onClick={handleToggle}
+        className={`relative z-[1001] inline-flex items-center gap-1.5 px-2.5 py-1 text-white text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer hover:shadow-sm active:scale-95 ${
           allOppose
             ? "bg-dark-mid hover:bg-dark-warm"
             : "bg-danger hover:bg-danger/90"
@@ -98,68 +93,78 @@ export function PacBadge({
         {formatCompact(totalAmount)} {label}
       </button>
 
-      {expanded && (
-        <>
-          {/* Invisible backdrop to catch outside clicks */}
-          <div
-            className="fixed inset-0 z-[999]"
-            onClick={() => setExpanded(false)}
-          />
-          {/* Popup rendered fixed so it escapes all parent overflow/stacking */}
-          <div
-            className="z-[1000] bg-paper border border-stone rounded-xl shadow-xl p-4 animate-scale-in"
-            style={popupStyle}
-          >
-            <h4 className="font-display text-base text-dark-warm mb-1">
-              AI Industry Spending
-            </h4>
-            <p className="text-xs text-muted mb-3">
-              Independent expenditures — Total: {formatMoney(totalAmount)}
-            </p>
-            <ul className="space-y-2">
-              {contributions.map((c, i) => (
-                <li key={i} className="flex justify-between items-start gap-2 text-xs">
-                  <div className="min-w-0">
-                    <span className="text-dark-warm font-medium block">
-                      {c.pac_name}
-                    </span>
+      {expanded &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <>
+            {/* Backdrop to close on outside click */}
+            <div
+              className="fixed inset-0 z-[999]"
+              onClick={() => setExpanded(false)}
+            />
+            {/* Popup at body level — escapes all parent stacking/overflow */}
+            <div
+              className="fixed z-[1000] w-80 bg-paper border border-stone rounded-xl shadow-xl p-4 animate-scale-in"
+              style={{ top: popupPos.top, left: popupPos.left }}
+            >
+              <h4 className="font-display text-base text-dark-warm mb-1">
+                AI Industry Spending
+              </h4>
+              <p className="text-xs text-muted mb-3">
+                Independent expenditures — Total: {formatMoney(totalAmount)}
+              </p>
+              <ul className="space-y-2">
+                {contributions.map((c, i) => (
+                  <li
+                    key={i}
+                    className="flex justify-between items-start gap-2 text-xs"
+                  >
+                    <div className="min-w-0">
+                      <span className="text-dark-warm font-medium block">
+                        {c.pac_name}
+                      </span>
+                      <span
+                        className={`text-xs ${
+                          c.supportOppose === "oppose"
+                            ? "text-dark-mid"
+                            : "text-accent"
+                        }`}
+                      >
+                        {c.supportOppose === "oppose"
+                          ? "opposing"
+                          : "supporting"}
+                        {c.parent_company !== c.pac_name && (
+                          <> &middot; {c.parent_company}</>
+                        )}
+                      </span>
+                    </div>
                     <span
-                      className={`text-xs ${
+                      className={`font-semibold shrink-0 ${
                         c.supportOppose === "oppose"
                           ? "text-dark-mid"
-                          : "text-accent"
+                          : "text-danger"
                       }`}
                     >
-                      {c.supportOppose === "oppose" ? "opposing" : "supporting"}
-                      {c.parent_company !== c.pac_name && (
-                        <> &middot; {c.parent_company}</>
-                      )}
+                      {formatMoney(c.amount)}
                     </span>
-                  </div>
-                  <span
-                    className={`font-semibold shrink-0 ${
-                      c.supportOppose === "oppose" ? "text-dark-mid" : "text-danger"
-                    }`}
-                  >
-                    {formatMoney(c.amount)}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-3 text-xs text-muted">
-              Source:{" "}
-              <a
-                href="https://www.humansfirst.com/ai-spending"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-dark-warm transition-colors duration-200"
-              >
-                Humans First AI Spending Tracker
-              </a>
-            </p>
-          </div>
-        </>
-      )}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs text-muted">
+                Source:{" "}
+                <a
+                  href="https://www.humansfirst.com/ai-spending"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-dark-warm transition-colors duration-200"
+                >
+                  Humans First AI Spending Tracker
+                </a>
+              </p>
+            </div>
+          </>,
+          document.body
+        )}
     </div>
   );
 }
