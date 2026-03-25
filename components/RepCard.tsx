@@ -44,7 +44,7 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
   const hasContactInfo = rep.phone || rep.website || rep.contactForm || rep.address || rep.email || rep.social?.twitter;
 
   return (
-    <div className="bg-white rounded-xl border border-stone/50 overflow-hidden hover:border-stone transition-colors duration-200 hover:shadow-sm">
+    <div className="bg-white rounded-xl border border-stone/50 hover:border-stone transition-colors duration-200 hover:shadow-sm">
       <div className="p-4 flex gap-4">
         {/* Photo */}
         <div className="shrink-0">
@@ -120,7 +120,7 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
 
       {/* Contact details panel */}
       {showContact && hasContactInfo && (
-        <div className="border-t border-stone/30 bg-linen/50 px-4 py-3 animate-slide-down">
+        <div className="border-t border-stone/30 bg-linen/50 px-4 py-3 rounded-b-xl animate-slide-down">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {rep.phone && (
               <a
