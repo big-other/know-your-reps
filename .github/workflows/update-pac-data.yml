@@ -1,0 +1,41 @@
+name: Update PAC Tracker Data
+
+on:
+  schedule:
+    # Runs daily at 8am UTC (3am ET / midnight PT)
+    - cron: "0 8 * * *"
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout know-your-reps
+        uses: actions/checkout@v4
+
+      - name: Clone tracker repo
+        run: |
+          git clone --depth 1 https://x-access-token:${{ secrets.TRACKER_PAT }}@github.com/Mihonarium/AI-political-spending-tracker.git /tmp/tracker
+
+      - name: Check for changes
+        id: check
+        run: |
+          if diff -q /tmp/tracker/data.json data/pac-tracker.json > /dev/null 2>&1; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No changes in tracker data."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            cp /tmp/tracker/data.json data/pac-tracker.json
+            UPDATED=$(python3 -c "import json; d=json.load(open('data/pac-tracker.json')); print(d.get('metadata',{}).get('last_updated','unknown'))")
+            echo "updated=$UPDATED" >> "$GITHUB_OUTPUT"
+            echo "Data updated (tracker last_updated: $UPDATED)"
+          fi
+
+      - name: Commit and push
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/pac-tracker.json
+          git commit -m "Update PAC tracker data (${{ steps.check.outputs.updated }})"
+          git push
