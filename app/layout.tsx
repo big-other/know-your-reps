@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { IframeResizer } from "@/components/IframeResizer";
 
 export const metadata: Metadata = {
   title: "Know Your Reps — Humans First",
@@ -29,6 +30,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col">
+        <IframeResizer />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
