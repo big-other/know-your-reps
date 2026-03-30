@@ -81,7 +81,7 @@ export function RepCard({ rep }: { rep: RepresentativeCard }) {
 
           <p className="text-sm text-muted mb-2.5">
             {rep.title}
-            {rep.district ? ` — ${rep.district}` : ""}
+            {rep.city ? ` — ${rep.city}, ${rep.state}` : rep.district ? ` — ${rep.district}` : ""}
           </p>
 
           {/* Badges */}

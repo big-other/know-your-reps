@@ -43,6 +43,7 @@ export interface StateLegislativeDistrict {
 
 export interface GeocodioResult {
   address_components: {
+    city?: string;
     state: string;
     zip: string;
   };
@@ -90,9 +91,10 @@ export interface RepresentativeCard {
   lastName: string;
   party: string;
   title: string;
-  level: "federal" | "state";
+  level: "federal" | "state" | "local";
   chamber: string;
   district?: string;
+  city?: string;
   state: string;
   photoUrl?: string;
   phone?: string;

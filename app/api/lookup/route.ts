@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { geocodeLookup, getStateFromResult } from "@/lib/geocodio";
 import { searchCandidates } from "@/lib/fec";
 import { loadPacTrackerData, checkPacMoney, type PacLookup } from "@/lib/pac-matcher";
+import { findLocalOfficials } from "@/lib/local-matcher";
 import { getCached, setCache, normalizeZip } from "@/lib/cache";
 import { parseFecName } from "@/lib/name-matcher";
 import senateClass2 from "@/data/senate-class-2.json";
@@ -157,6 +158,13 @@ export async function GET(request: NextRequest) {
           );
         }
       }
+    }
+
+    // Local officials (mayors, etc.)
+    const city = result.address_components?.city;
+    if (city) {
+      const localReps = findLocalOfficials(city, state, pacLookup);
+      representatives.push(...localReps);
     }
 
     // 3. Fetch 2026 candidates from FEC

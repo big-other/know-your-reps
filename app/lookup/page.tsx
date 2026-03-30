@@ -78,6 +78,7 @@ function LookupResults() {
 
   const federalReps = data.representatives.filter((r) => r.level === "federal");
   const stateReps = data.representatives.filter((r) => r.level === "state");
+  const localReps = data.representatives.filter((r) => r.level === "local");
 
   return (
     <div className="space-y-12">
@@ -110,12 +111,25 @@ function LookupResults() {
         )}
 
         {stateReps.length > 0 && (
-          <div>
+          <div className="mb-8">
             <h3 className="text-xs font-medium text-stone uppercase tracking-widest mb-3 font-[family-name:var(--font-body)]">
               State
             </h3>
             <div className="grid gap-3 stagger-children">
               {stateReps.map((rep, i) => (
+                <RepCard key={i} rep={rep} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {localReps.length > 0 && (
+          <div>
+            <h3 className="text-xs font-medium text-stone uppercase tracking-widest mb-3 font-[family-name:var(--font-body)]">
+              Local
+            </h3>
+            <div className="grid gap-3 stagger-children">
+              {localReps.map((rep, i) => (
                 <RepCard key={i} rep={rep} />
               ))}
             </div>
